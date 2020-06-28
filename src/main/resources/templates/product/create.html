@@ -80,21 +80,14 @@
         <label for="name">Name</label>
         <input type="text" th:field="*{name}" placeholder="Enter name..." name="name" id="name"
                required minlength="3" maxlength="100">
-<!--        <input type="text" th:errors="*{username}" th:if="${#fields.hasErrors('username')}">-->
 
         <label for="price">Price</label>
         <input type="text" th:field="*{price}" placeholder="Enter price" name="price" id="price"
                required>
-<!--        <input type="text" th:errors="*{password}" th:if="${#fields.hasErrors('password')}">-->
 
         <label for="brand">Brand</label>
         <input type="text" th:field="*{brand}" placeholder="Enter brand" name="brand" id="brand"
                required minlength="3" maxlength="100">
-<!--        <input type="text" th:errors="*{phone}" th:if="${#fields.hasErrors('phone')}">-->
-
-<!--        <label for="type">Type</label>-->
-<!--        <input type="text" th:field="*{type}" placeholder="Enter type" name="type" id="type" required>-->
-<!--        <input type="text" th:errors="*{address}" th:if="${#fields.hasErrors('address')}">-->
 
         <label for="type">Type</label><br>
         <select th:field="*{type}" id="type" style="width: 300px">
@@ -105,7 +98,6 @@
         <br>
         <label for="desc">Description</label>
         <input type="text" th:field="*{description}" placeholder="Enter description..." name="desc" id="desc">
-        <!--        <input type="text" th:errors="*{address}" th:if="${#fields.hasErrors('address')}">-->
 
         <button type="submit">Add</button>
         <div style="width: 180px">
