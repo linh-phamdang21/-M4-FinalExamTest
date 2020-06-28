@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Product List </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+<!--<nav class="navbar navbar-expand-lg navbar-dark bg-dark">-->
+<!--    <a class="navbar-brand" href="#">-->
+<!--        <img src="/images/market-store-icon.jpg" alt="Avatar" class="avatar" style="border-radius: 50%; width: 50px;height: 50px">-->
+<!--    </a>-->
+<!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"-->
+<!--            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--        <span class="navbar-toggler-icon"></span>-->
+<!--    </button>-->
+
+<!--    <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--        <ul class="navbar-nav mr-auto">-->
+<!--            <li class="nav-item ">-->
+<!--                <a class="nav-link" th:href="@{/admin/product/list}" th:text="#{listProduct.href}"> </a>-->
+<!--            </li>-->
+<!--            <li class="nav-item ">-->
+<!--                <a class="nav-link" th:href="@{/admin/brand/list}" th:text="#{listProduct.href2}"> </a>-->
+<!--            </li>-->
+<!--            <li class="nav-item ">-->
+<!--                <a class="nav-link" th:href="@{/admin/category/list}" th:text="#{listProduct.href1}"> </a>-->
+<!--            </li>-->
+<!--            <li class="nav-item ">-->
+<!--                <a class="nav-link" th:href="@{/type/list}" th:text="#{listProductType}"></a>-->
+<!--            </li>-->
+<!--            <li class="nav-item ">-->
+<!--                <a class="nav-link" th:href="@{/admin/customer_list}" th:text="#{ListCustomer}"></a>-->
+<!--            </li>-->
+<!--            <li class="nav-item ">-->
+<!--                <a class="nav-link" th:href="@{/admin/bills}" th:text="#{listBill}"></a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</nav>-->
+<!--<span th:text="#{listProduct.language}"></span> <a href="?lang=en">English</a> | <a href="?lang=vn">Vietnamese</a>-->
+<br> <h4>Product List </h4>
+<span>
+    <a th:href="@{/product/create}"> Add new product </a><br>
+    <a th:href="@{/product/list}"> All product </a><br>
+    <a th:href="@{/productType/list}">Product Type</a>
+</span>
+<div style="margin: auto; width: 800px">
+    <br>
+    <form style="margin-left: 100px">
+<!--        <span th:text="#{listProduct.search}"></span>-->
+        <input type="text" name="s">
+        <input type="submit" th:value="Search">
+    </form>
+    <br>
+    <table class="table table-striped row" style="margin: auto">
+<!--        <tr>-->
+<!--            <td th:text="#{IdCustomer.id}" style="width: 100px"></td>-->
+<!--            <td th:text="#{nameCustomer}" style="width: 200px"></td>-->
+<!--            <td th:text="#{passCustomer}" style="width: 200px"></td>-->
+<!--            <td th:text="#{PhoneCustomer}" style="width: 150px"></td>-->
+<!--            <td th:text="#{AddressCustomer}" style="width: 200px"></td>-->
+<!--            <td style="width: 50px"></td>-->
+<!--            <td style="width: 50px"></td>-->
+<!--        </tr>-->
+
+        <tr>
+            <td th:text="Id" style="width: 100px"></td>
+            <td th:text="Name" style="width: 300px"></td>
+            <td th:text="Price" style="width: 200px"></td>
+            <td th:text="Time" style="width: 300px"></td>
+            <td th:text="Brand" style="width: 200px"></td>
+            <td th:text="Type" style="width: 200px"></td>
+            <td th:text="Description" style="width: 400px"></td>
+            <td colspan="2" style="width: 50px; text-align: center">Action</td>
+        </tr>
+
+        <th:block th:each="product : ${products}">
+            <tr>
+                <td th:text="${product.getId()}" style="width: 100px"></td>
+                <td th:text="${product.getName()}" style="width: 300px"></td>
+                <td th:text="${product.getPrice()}" style="width: 200px"></td>
+                <td th:text="${product.getCreateAt()}" style="width: 300px"></td>
+                <td th:text="${product.getBrand()}" style="width: 200px"></td>
+                <td th:text="${product.getType().getName()}" style="width: 200px"></td>
+                <td th:text="${product.getDescription()}" style="width: 400px"></td>
+                <td><a th:href="@{/product/edit/__${product.id}__}" >Edit</a></td>
+                <td><a th:href="@{/product/delete/__${product.id}__}" >Delete</a></td>
+            </tr>
+        </th:block>
+    </table>
+    <br>
+<!--    <a th:href="@{/logout}" style="margin-left: 100px" th:text="#{logout}"></a>-->
+</div>
+<div>
+    <a th:href="@{'/product/list'(page=${products.number - 1})}" th:if="${products.hasPrevious()}">Previous</a>
+    <span th:text="${products.number + 1}"></span>/<span th:text="${products.totalPages}"></span>
+    <a th:href="@{'/product/list'(page=${products.number + 1})}" th:if="${products.hasNext()}">Next</a>
+</div>
+
+</body>
+</html>
